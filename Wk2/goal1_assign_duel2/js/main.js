@@ -1,8 +1,8 @@
 
  /*
 Sara Maneval
-03/07/2015
-ANALYZE Duel #1
+03/13/2015
+ANALYZE Duel #2
  */
 
  //self-executing function- contains all of the content for the program
