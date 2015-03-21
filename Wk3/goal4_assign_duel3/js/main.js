@@ -1,54 +1,54 @@
-
  /*
 Sara Maneval
-03/13/2015
+03/20/2015
 ANALYZE Duel #2
  */
 
  //self-executing function- contains all of the content for the program
  (function(){
 
-  //Make sure the HTML and js file are connected
+
+
+  /* The Fighting Function */
+
+
+
+       //Make sure the HTML and js file are connected
  console.log("FIGHT!");
 
 
  /* Sparky Player One, Health, Damage*/
- var playerOne = ["Sparky", 100, 20];
+playerOne = {name:"Sparky", health:100, damage:20};
 
  /* Fido Player Two, Healthy, Damage */
- var playerTwo = ["Fido", 100, 20];
+playerTwo = {name:"Fido", health:100, damage:20};
 
 
   /* Keep track of different rounds the player is in */
  var round=0;
-
-  /* The Fighting Function */
-
- function fight() {
-
+     
   //Making sure it goes into the fight function
-  console.log("In the fight function");
 
- //Alert user of the players names and health and that they are ready to start
-  alert(playerOne[0] + ":" + playerOne[1] + " *START* " +playerTwo[0] + ":" + playerTwo[1]);
+     function fight() {
+         console.log("In the fight function");
 
  /* Making sure there is only 10 rounds for the fight */
   for (var i = 0; i < 10; i++) {
 
    //random formula is - Math.floor(Math.random()*(max-min+min);
 
-   var minDamage1 = playerOne[2] * .5;
-   var minDamage2 = playerTwo[2] * .5;
-   var f1 = Math.floor(Math.random() * (playerOne[2] - minDamage1) + minDamage1);
-   var f2 = Math.floor(Math.random() * (playerTwo[2] - minDamage2) + minDamage2);
+   var minDamage1 = playerOne["damage"] * .5;
+   var minDamage2 = playerTwo["damage"] * .5;
+   var f1 = Math.floor(Math.random() * (playerOne["damage"] - minDamage1) + minDamage1);
+   var f2 = Math.floor(Math.random() * (playerTwo["damage"] - minDamage2) + minDamage2);
 
 
    //inflict damage by minusing the new random number to the players health
-   playerOne[1] -= f1;
-   playerTwo[1] -= f2;
+   playerOne["health"] -= f1;
+   playerTwo["health"] -= f2;
 
    //Check and see what each of the players health is
-   console.log(playerOne[0] + ":" + playerOne[1] + " " + playerTwo[0] + ":" + playerTwo[1]);
+   console.log(playerOne["name"] + ":" + playerOne["health"] + " " + playerTwo["damage"] + ":" + playerTwo["health"]);
 
    //check for winner
    var result = winnerCheck();
@@ -58,38 +58,43 @@ ANALYZE Duel #2
    if (result === "no winner") {
     round++;
 
-    //alert the user what round they are on and where the players health is at
-    alert(playerOne[0] + ":" + playerOne[1] + " *ROUND " + round +" OVER* " + playerTwo[0] + ":" + playerTwo[1]);
+
+       
+    document.getElementById("kabal").querySelector("p").innerHTML = playerOne["health"];
+    document.getElementById("kratos").querySelector("p").innerHTML = playerTwo["health"];
+       
 
     //if there is a winner alert the user the results and end the game
    } else {
-    alert(result);
+
+    document.getElementById("kabal").querySelector("p").innerHTML = playerOne["health"];
+    document.getElementById("kratos").querySelector("p").innerHTML = playerTwo["health"];
     break;
    };
   };
+     document.querySelector(".buttonblue").removeEventListener("click", fight, false);
+     
  };
 
   function winnerCheck() {
    var result = "no winner";
    //if both players have a health less than 1 they both die
-   if (playerOne[1] < 1 && playerTwo[1] < 1) {
+   if (playerOne["health"] < 1 && playerTwo["health"] < 1) {
     result = "You Both Die";
 
    //if player ones health is less than one player two wins
-   } else if (playerOne[1] < 1) {
-    result = playerTwo[0] + " WINS!!!"
+   } else if (playerOne["health"] < 1) {
+    result = playerTwo["name"] + " WINS!!!"
 
     //if player twos health is less than one, player one wins
-   } else if (playerTwo[1] < 1) {
-    result = playerOne[0] + " WINS!!!"
+   } else if (playerTwo["health"] < 1) {
+    result = playerOne["name"] + " WINS!!!"
    };
 
    //show results
    return result;
   };
 
-  /* Fight Starts Below */
-
-  fight();
+ document.querySelector(".buttonblue").addEventListener("click", fight, false);
 
 })();
